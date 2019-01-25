@@ -1,0 +1,43 @@
+{
+  "name": "@loreena/gulp-made-easy",
+  "version": "1.0.0",
+  "description": "A ready-made gulp that only needs config setup to work",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "cross-env": "^5.2.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-clean-css": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-if": "^2.0.2",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-insert": "^0.5.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^3.0.1",
+    "imagemin-pngquant": "^7.0.0",
+    "minimist": "^1.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development gulp",
+    "build": "cross-env NODE_ENV=production gulp build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lorenaramonda/gulp-made-easy.git"
+  },
+  "keywords": [
+    "gulp"
+  ],
+  "author": "Lorena Ramonda <lorena@ramonda.me>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lorenaramonda/gulp-made-easy/issues"
+  },
+  "homepage": "https://github.com/lorenaramonda/gulp-made-easy#readme"
+}
