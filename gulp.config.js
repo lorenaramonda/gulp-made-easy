@@ -2,7 +2,7 @@
 module.exports = {
   css: {
     path: {
-      src: "./src/sass/",
+      src: "./src/scss/",
       dest: "./css/"
     },
     output: "compressed", // nested | compact | expanded | compressed
