@@ -7,8 +7,10 @@
  */
 
 // import modules
-const pkg = require("./package.json"),
-  config = require("./gulp.config"),
+const path = require("path"),
+  basePath = process.cwd() + "/",
+  pkg = require(basePath + "package.json"),
+  config = require(basePath + "gulp.config"),
   gulp = require("gulp"),
   autoprefixer = require("gulp-autoprefixer"),
   sass = require("gulp-sass"),
@@ -16,7 +18,6 @@ const pkg = require("./package.json"),
   gulpif = require("gulp-if"),
   insert = require("gulp-insert"),
   uglify = require("gulp-uglify"),
-  rename = require("gulp-rename"),
   cleanCSS = require("gulp-clean-css"),
   notify = require("gulp-notify"),
   sourcemaps = require("gulp-sourcemaps");
@@ -32,7 +33,7 @@ const options = minimist(process.argv.slice(2), knownOptions);
 config.css.files.forEach(stylesheet => {
   gulp.task("css-" + stylesheet.substr(0, stylesheet.indexOf(".")), () => {
     return gulp
-      .src(config.css.path.src + stylesheet)
+      .src(path.resolve(basePath + config.css.path.src + stylesheet))
       .pipe(gulpif(options.env !== "production", sourcemaps.init()))
       .pipe(
         sass({
@@ -60,7 +61,7 @@ Object.keys(config.js.files).forEach(item => {
   gulp.task("js-" + item, () => {
     console.log("Compiling " + item + " js...");
     return gulp
-      .src(config.js.files[item]) // object value
+      .src(path.resolve(basePath + config.js.files[item])) // object value
       .pipe(gulpif(options.env !== "production", sourcemaps.init()))
       .pipe(concat(item + ".js")) // object key
       .pipe(gulpif(options.env === "production", uglify()))
@@ -86,14 +87,17 @@ gulp.task(
     ),
   () => {
     gulp
-      .watch([config.css.path.src + "**/*.scss"], ["css"])
+      .watch(
+        [path.resolve(basePath + config.css.path.src + "**/*.scss")],
+        ["css"]
+      )
       .on("change", function(event) {
         console.info(
           "File " + event.path + " was " + event.type + ", running tasks..."
         );
       });
     gulp
-      .watch([config.js.path.src + "**/*.js"], ["js"])
+      .watch([path.resolve(basePath + config.js.path.src + "**/*.js")], ["js"])
       .on("change", function(event) {
         console.info(
           "File " + event.path + " was " + event.type + ", running tasks..."
