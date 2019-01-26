@@ -7,7 +7,7 @@ Supports sass/scss and js.
 
 ```
 npm install @loreena/gulp-made-easy --save-dev
-cp node_modules/gulp-made-easy/gulp.config.js ./
+cp node_modules/@loreena/gulp-made-easy/gulp.config.js ./
 ```
 
 This will install and copy the configuration file into the root of your project.

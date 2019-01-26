@@ -38,12 +38,18 @@ config.css.files.forEach(stylesheet => {
       .pipe(
         sass({
           outputStyle: config.css.output,
+          includePaths: [path.resolve(basePath + "node_modules/")],
           errLogToConsole: true
         }).on("error", sass.logError)
       )
       .pipe(autoprefixer({ browsers: ["last 2 versions"] }))
       .pipe(gulpif(options.env !== "production", sourcemaps.write("./maps")))
-      .pipe(insert.prepend("/*" + pkg.name + ": " + new Date() + "*/\n"))
+      .pipe(
+        gulpif(
+          options.env === "production",
+          insert.prepend("/*" + pkg.name + ": " + new Date() + "*/\n")
+        )
+      )
       .pipe(gulp.dest(config.css.path.dest))
       .pipe(notify({ message: "Successfully compiled Sass" }));
   });
@@ -61,12 +67,17 @@ Object.keys(config.js.files).forEach(item => {
   gulp.task("js-" + item, () => {
     console.log("Compiling " + item + " js...");
     return gulp
-      .src(path.resolve(basePath + config.js.files[item])) // object value
+      .src(config.js.files[item].map(e => path.resolve(basePath + e))) // object value
       .pipe(gulpif(options.env !== "production", sourcemaps.init()))
       .pipe(concat(item + ".js")) // object key
       .pipe(gulpif(options.env === "production", uglify()))
       .pipe(gulpif(options.env !== "production", sourcemaps.write("./maps")))
-      .pipe(insert.prepend("/*" + pkg.name + ": " + new Date() + "*/\n"))
+      .pipe(
+        gulpif(
+          options.env === "production",
+          insert.prepend("/*" + pkg.name + ": " + new Date() + "*/\n")
+        )
+      )
       .pipe(gulp.dest(config.js.path.dest))
       .pipe(notify({ message: "Successfully compiled Javascript" }));
   });
