@@ -8,7 +8,7 @@
 
 // import modules
 const path = require("path"),
-  basePath = process.cwd(),
+  basePath = process.cwd() + "/",
   pkg = require(path.join(basePath, "./package.json")),
   config = require(path.join(basePath, "./gulp.config")),
   gulp = require("gulp"),
