@@ -1,6 +1,6 @@
 {
   "name": "@loreena/gulp-made-easy",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "A ready-made gulp that only needs config setup to work",
   "directories": {
     "doc": "docs"
