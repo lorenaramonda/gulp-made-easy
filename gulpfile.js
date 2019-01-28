@@ -8,9 +8,9 @@
 
 // import modules
 const path = require("path"),
-  basePath = process.cwd() + "/",
-  pkg = require(basePath + "package.json"),
-  config = require(basePath + "gulp.config"),
+  basePath = process.cwd(),
+  pkg = require(path.join(basePath, "./package.json")),
+  config = require(path.join(basePath, "./gulp.config")),
   gulp = require("gulp"),
   autoprefixer = require("gulp-autoprefixer"),
   sass = require("gulp-sass"),
@@ -33,17 +33,17 @@ const options = minimist(process.argv.slice(2), knownOptions);
 config.css.files.forEach(stylesheet => {
   gulp.task("css-" + stylesheet.substr(0, stylesheet.indexOf(".")), () => {
     return gulp
-      .src(path.resolve(basePath + config.css.path.src + stylesheet))
+      .src(path.join(basePath + config.css.path.src + stylesheet))
       .pipe(gulpif(options.env !== "production", sourcemaps.init()))
       .pipe(
         sass({
           outputStyle: config.css.output,
-          includePaths: [path.resolve(basePath + "node_modules/")],
+          includePaths: [path.join(basePath + "node_modules/")],
           errLogToConsole: true
         }).on("error", sass.logError)
       )
       .pipe(autoprefixer({ browsers: ["last 2 versions"] }))
-      .pipe(gulpif(options.env !== "production", sourcemaps.write("./maps")))
+      .pipe(gulpif(options.env !== "production", sourcemaps.write(".")))
       .pipe(
         gulpif(
           options.env === "production",
@@ -67,11 +67,11 @@ Object.keys(config.js.files).forEach(item => {
   gulp.task("js-" + item, () => {
     console.log("Compiling " + item + " js...");
     return gulp
-      .src(config.js.files[item].map(e => path.resolve(basePath + e))) // object value
+      .src(config.js.files[item].map(e => path.join(basePath + e))) // object value
       .pipe(gulpif(options.env !== "production", sourcemaps.init()))
       .pipe(concat(item + ".js")) // object key
       .pipe(gulpif(options.env === "production", uglify()))
-      .pipe(gulpif(options.env !== "production", sourcemaps.write("./maps")))
+      .pipe(gulpif(options.env !== "production", sourcemaps.write(".")))
       .pipe(
         gulpif(
           options.env === "production",
@@ -98,17 +98,14 @@ gulp.task(
     ),
   () => {
     gulp
-      .watch(
-        [path.resolve(basePath + config.css.path.src + "**/*.scss")],
-        ["css"]
-      )
+      .watch([path.join(basePath + config.css.path.src + "**/*.scss")], ["css"])
       .on("change", function(event) {
         console.info(
           "File " + event.path + " was " + event.type + ", running tasks..."
         );
       });
     gulp
-      .watch([path.resolve(basePath + config.js.path.src + "**/*.js")], ["js"])
+      .watch([path.join(basePath + config.js.path.src + "**/*.js")], ["js"])
       .on("change", function(event) {
         console.info(
           "File " + event.path + " was " + event.type + ", running tasks..."
@@ -122,7 +119,7 @@ gulp.task("default", ["watch"], done => {
   console.log("Watching files...");
 });
 
-gulp.task("build", ["css"], done => {
+gulp.task("build", ["css", "js"], done => {
   done();
   console.log("All files compiled and minified! Ready for production!");
 });
