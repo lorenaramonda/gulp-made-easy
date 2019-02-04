@@ -16,8 +16,8 @@ Add this scripts to your package.json:
 
 ```
 "scripts": {
-    "dev": "cross-env NODE_ENV=development gulp --cwd --gulpfile ./node_modules/@loreena/gulp-made-easy/gulpfile.js",
-    "build": "cross-env NODE_ENV=production gulp build --cwd --gulpfile ./node_modules/@loreena/gulp-made-easy/gulpfile.js"
+    "dev": "cross-env NODE_ENV=development gulp --cwd ./ -f ./node_modules/@loreena/gulp-made-easy/gulpfile.js",
+    "build": "cross-env NODE_ENV=production gulp build --cwd ./ -f ./node_modules/@loreena/gulp-made-easy/gulpfile.js"
   }
 ```
 

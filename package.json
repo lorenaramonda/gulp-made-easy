@@ -1,6 +1,6 @@
 {
   "name": "@loreena/gulp-made-easy",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "description": "A ready-made gulp that only needs config setup to work",
   "directories": {
     "doc": "docs"
@@ -9,13 +9,10 @@
     "cross-env": "^5.2.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^6.0.0",
-    "gulp-clean-css": "^4.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-if": "^2.0.2",
-    "gulp-imagemin": "^5.0.3",
     "gulp-insert": "^0.5.0",
     "gulp-notify": "^3.2.0",
-    "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.1",
@@ -39,5 +36,8 @@
   "bugs": {
     "url": "https://github.com/lorenaramonda/gulp-made-easy/issues"
   },
-  "homepage": "https://github.com/lorenaramonda/gulp-made-easy#readme"
+  "homepage": "https://github.com/lorenaramonda/gulp-made-easy#readme",
+  "engines": {
+    "node": ">= 4.0"
+  }
 }

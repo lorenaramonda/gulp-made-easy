@@ -18,7 +18,6 @@ const path = require("path"),
   gulpif = require("gulp-if"),
   insert = require("gulp-insert"),
   uglify = require("gulp-uglify"),
-  cleanCSS = require("gulp-clean-css"),
   notify = require("gulp-notify"),
   sourcemaps = require("gulp-sourcemaps");
 // set variables
