@@ -16,6 +16,7 @@ const path = require('path'),
   sass = require('gulp-sass'),
   concat = require('gulp-concat'),
   gulpif = require('gulp-if'),
+  gutil = require('gulp-util'),
   insert = require('gulp-insert'),
   uglify = require('gulp-uglify'),
   notify = require('gulp-notify'),
@@ -69,7 +70,10 @@ Object.keys(config.js.files).forEach(item => {
       .src(config.js.files[item].map(e => path.join(basePath + e))) // object value
       .pipe(gulpif(options.env !== 'production', sourcemaps.init()))
       .pipe(concat(item + '.js')) // object key
-      .pipe(gulpif(options.env === 'production', uglify()))
+      .pipe(gulpif(options.env === 'production', uglify().on('error', function(err) {
+        gutil.log(gutil.colors.red('[Error]'), err.toString());
+        this.emit('end');
+      })))
       .pipe(gulpif(options.env !== 'production', sourcemaps.write('.')))
       .pipe(
         gulpif(

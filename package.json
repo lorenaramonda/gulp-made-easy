@@ -1,6 +1,6 @@
 {
   "name": "@loreena/gulp-made-easy",
-  "version": "0.2.14",
+  "version": "0.2.15",
   "description": "A ready-made gulp that only needs config setup to work",
   "main": "gulpfile.js",
   "directories": {
@@ -17,6 +17,7 @@
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.1",
+    "gulp-util": "^3.0.8",
     "minimist": "^1.2.0"
   },
   "devDependencies": {},
